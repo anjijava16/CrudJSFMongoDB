@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>:: Cadastro Básico :: </title>
+    </h:head>
+    <h:body>
+        <h:form>  
+
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+            <br></br>
+            <center><font size="18">C.R.U.D</font></center>
+            <br></br>
+            <br></br>
+
+            <center>
+
+                <p:tabView id="tabView" style="width: 1000px;" activeIndex="#{usuarioBean.activTab}" >
+
+                    <p:tab id="tab1" title="Incluir">
+                        <p:panelGrid columns="4"  style="border: 0;">
+
+                            <h:outputLabel for="nome" value="Nome:  *" />
+                            <p:inputText id="nome" value="#{usuarioBean.nome}" label="nome" />
+
+                            <h:outputLabel for="sobrenome" value="Sobrenome:  *" />
+                            <p:inputText id="sobrenome" value="#{usuarioBean.sobrenome}" label="sobrenome" />
+
+                            <h:outputLabel for="cpf" value="CPF:  *" />
+                            <p:inputMask id="cpf" value="#{usuarioBean.cpf}" label="cpf" mask="999.999.999-99" />
+
+                            <h:outputLabel for="sexo" value="Sexo:  *" />
+                            <p:inputText id="sexo" value="#{usuarioBean.sexo}" label="sexo" />
+
+                            <h:outputLabel for="rua" value="Rua:  *" />
+                            <p:inputText id="rua" value="#{usuarioBean.rua}" label="rua" />
+
+                            <h:outputLabel for="numero" value="Número:  *" />
+                            <p:inputText id="numero" value="#{usuarioBean.numero}" label="numero" />
+
+                            <h:outputLabel for="bairro" value="Bairro:  *" />
+                            <p:inputText id="bairro" value="#{usuarioBean.bairro}" label="bairro" />
+
+                            <h:outputLabel for="complemento" value="Complemento:  *" />
+                            <p:inputText id="complemento" value="#{usuarioBean.complemento}" label="complemento" />
+
+                            <td></td><td></td><td></td>
+                            <p:commandButton value="Salvar" actionListener="#{usuarioBean.salvarUsuario()}" ajax="false" /> 
+                            <p:commandButton value="Limpar" actionListener="#{usuarioBean.cleanUpFields()}" ajax="false" /> 
+
+                        </p:panelGrid>
+                    </p:tab>
+
+                    <p:tab id="tab2" title="Pesquisar">
+
+                        <h:outputLabel for="buscanome" value="Buscar:   " />
+                        <p:inputText id="buscanome" value="#{usuarioBean.busca}" label="buscanome" />
+                        <p:commandButton value="Buscar" actionListener="#{usuarioBean.pesquisarUsuario()}" ajax="false" />  
+                        <br></br><br></br><br></br>
+
+                        <p:dataTable id="usuarioTable" var="user" value="#{usuarioBean.usuarios}">
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{user.nome}" />
+                            </p:column>
+
+                            <p:column headerText="Sobrenome">
+                                <h:outputText value="#{user.sobrenome}" />
+                            </p:column>
+
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{user.cpf}" />
+                            </p:column>
+
+                            <p:column headerText="Sexo">
+                                <h:outputText value="#{user.sexo}" />
+                            </p:column>
+
+                            <p:column headerText="Ações">
+                                <center>
+                                    <p:commandButton value="Excluir" action="#{usuarioBean.deletarUsuario}" ajax="false" update="usuarioTable" />
+                                    <p:commandButton value="Editar" action="#{usuarioBean.editarUsuario}" ajax="false" update="usuarioTable" />
+                                </center>  
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:tab>
+
+                </p:tabView>
+            </center>
+
+        </h:form>  
+    </h:body>
+</html>
